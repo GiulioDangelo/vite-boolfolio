@@ -1,11 +1,11 @@
 <script>
 	import axios from "axios";
-	// import ProjectCard from "./ProjectCard.vue";
+	import ProjectCard from "./ProjectCard.vue";
 
 	export default {
-		// components:{
-		// 	ProjectCard,
-		// },
+		components:{
+			ProjectCard,
+		},
 
 		data() {
 			return {
@@ -69,9 +69,10 @@
 
   <div class="container-fluid d-flex justify-content-center flex-wrap">
 
-	<!-- <ProjectCard :project="project" /> -->
+	<!-- <ProjectCard :arrProj="arrProj" /> -->
+	<ProjectCard v-for="project in arrProj" :key="project.id" :project="project"/>
 
-    <div
+    <!-- <div
       class="card mt-4"
       style="width: 18rem"
       v-for="project in arrProj"
@@ -83,7 +84,7 @@
         <p class="card-text">{{ project.content }}</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-    </div>
+    </div> -->
   
     <ul class="pagination">
       <li class="page-item" 
