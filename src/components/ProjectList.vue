@@ -1,7 +1,12 @@
 <script>
 	import axios from "axios";
+	// import ProjectCard from "./ProjectCard.vue";
 
 	export default {
+		// components:{
+		// 	ProjectCard,
+		// },
+
 		data() {
 			return {
 				arrProj: [],
@@ -63,6 +68,8 @@
 	<h2>progetti</h2>
 
   <div class="container-fluid d-flex justify-content-center flex-wrap">
+
+	<!-- <ProjectCard :project="project" /> -->
 
     <div
       class="card mt-4"
