@@ -86,29 +86,29 @@
       </div>
     </div> -->
   
-    <ul class="pagination">
-      <li class="page-item" 
-      :class="currentPage == 1 ? 'disabled' : '' ">
-        <span class="page-link" @click="prev()">Previous</span>
-      </li>
-  
-      <li
-        v-for="page in nPages"
-        :key="page"
-        class="page-item"
-        :class="{active: page == currentPage}"
-      >
-        <span class="page-link" @click="changePage(page)">
-          {{ page }}
-        </span>
-      </li>
-  
-      <li class="page-item">
-        <span class="page-link" @click="next()">Next</span>
-      </li>
-    </ul>
+	
+</div>
+<ul class="pagination">
+  <li class="page-item" 
+  :class="currentPage == 1 ? 'disabled' : '' ">
+	<span class="page-link" @click="prev()">Previous</span>
+  </li>
 
-  </div>
+  <li
+	v-for="page in nPages"
+	:key="page"
+	class="page-item"
+	:class="{active: page == currentPage}"
+  >
+	<span class="page-link" @click="changePage(page)">
+	  {{ page }}
+	</span>
+  </li>
+
+  <li class="page-item">
+	<span class="page-link" @click="next()">Next</span>
+  </li>
+</ul>
 </template>
 
 <style lang="scss" scoped>

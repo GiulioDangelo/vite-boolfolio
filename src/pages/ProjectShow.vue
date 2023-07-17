@@ -11,7 +11,9 @@ export default {
         // esempio: http://localhost:8000/api/projects/iusto-hic-libero-culpa-sit-similique
         axios
             .get('http://localhost:8000/api/projects/' + this.$route.params.slug)
-            .then(response =>console.log(response));
+            .then(response =>{
+                this.arrProj = response.data.data;
+            });
 
     },
 
@@ -19,6 +21,9 @@ export default {
 </script>
 
 <template>
+    <!-- <div class="container" v-for="project in arrProj">
+        <h1>{{ project.title }}</h1>
+    </div> -->
     show
 </template>
 

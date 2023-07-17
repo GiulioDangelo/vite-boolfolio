@@ -7,8 +7,9 @@ export default {
 </script>
 
 <template>
+  <div class="row m-5">
     <div
-      class="card mt-4"
+      class="card mt-4 col-4"
       style="width: 18rem"
     >
       <img :src="project.url_image" class="card-img-top" :alt="project.id" />
@@ -20,8 +21,19 @@ export default {
         class="btn btn-primary">View</router-link>
       </div>
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-    
+  .card-body{
+    height: 600px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn{
+    width: 100%;
+  }
 </style>
