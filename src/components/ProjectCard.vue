@@ -15,7 +15,6 @@ export default {
       <img :src="project.url_image" class="card-img-top" :alt="project.id" />
       <div class="card-body">
         <h5 class="card-title">{{ project.title }}</h5>
-        <p class="card-text">{{ project.content }}</p>
         <router-link 
         :to="{ name: 'projects.show', params: { slug:  project.slug } }" 
         class="btn btn-primary">View</router-link>
@@ -26,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
   .card-body{
-    height: 600px;
+    height: 200px;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
