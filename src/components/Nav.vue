@@ -2,9 +2,13 @@
 export default {
     data() {
 		return {
-			searchString: "",
+			searchString: '',
 		}
 	},
+
+	// created() {
+	// 	this.searchString = new URLSearchParams(window.location.search).get('q')
+	// },
 }
 </script>
 
@@ -36,8 +40,19 @@ export default {
 						>
 					</li>
 				</ul>
-				<form class="d-flex" role="search" @submit.prevent="$router.push({name: projects , query: {q: searchString} })">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="searchString">
+				<form 
+					class="d-flex" 
+					role="search"
+					@submit.prevent="$router.push({name: 'projects' , query: {q: searchString} })">
+
+					<input 
+						class="form-control me-2" 
+						type="search" 
+						placeholder="Search" 
+						aria-label="Search" 
+						v-model="searchString"
+					>
+
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 			</div>

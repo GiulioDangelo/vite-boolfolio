@@ -27,6 +27,7 @@ export default {
         <h1>{{ proj.title }}</h1>
         <img :src="proj.url_image" alt="">
         <p>{{ proj.content }}</p>
+        <div>Last update: {{ this.luxon.now().toFormat('dd/MM/yyyy') }}</div>
     </template>
 </template>
 

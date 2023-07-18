@@ -3,13 +3,14 @@
 	import ProjectCard from "./ProjectCard.vue";
 
 	export default {
-		components:{
+		components: {
 			ProjectCard,
 		},
 
 		data() {
 			return {
 				arrProj: [],
+				arrTypes: [],
 				currentPage: 1,
 				nPages: 0,
 			};
@@ -26,6 +27,7 @@
 					.get("http://127.0.0.1:8000/api/projects", {
 						params: {
 							page: this.currentPage,
+							q: new URLSearchParams(window.location.search).get("q"),
 						},
 					})
 					.then((response) => {
@@ -33,6 +35,12 @@
 						this.nPages = response.data.last_page;
 					});
 			},
+
+			// getTypes() {
+			// 	axios.get("http://localhost:8000/api/types").then((response) => {
+			// 		console.log(response.data.data);
+			// 	});
+			// },
 
 			next() {
 				if (this.currentPage < this.nPages) {
@@ -50,16 +58,7 @@
 		},
 
 		created() {
-			axios
-				.get("http://127.0.0.1:8000/api/projects", {
-					params: {
-						page: this.currentPage,
-					},
-				})
-				.then((response) => {
-					this.arrProj = response.data.data;
-					this.nPages = response.data.last_page;
-				});
+			this.getProjects();
 		},
 	};
 </script>
@@ -67,12 +66,25 @@
 <template>
 	<h2>progetti</h2>
 
-  <div class="container-fluid d-flex justify-content-center flex-wrap">
+	<div class="container-fluid d-flex justify-content-center flex-wrap">
 
-	<!-- <ProjectCard :arrProj="arrProj" /> -->
-	<ProjectCard v-for="project in arrProj" :key="project.id" :project="project"/>
+		<form>
+			<label class="mb-2" for="type">Type</label>
+			<select class="form-select w-25" id="type">
+				<option v-for="type in arrTypes">
+					{{ type.name }}
+				</option>
+			</select>
+		</form>
 
-    <!-- <div
+
+		<ProjectCard
+			v-for="project in arrProj"
+			:key="project.id"
+			:project="project"
+		/>
+
+		<!-- <div
       class="card mt-4"
       style="width: 18rem"
       v-for="project in arrProj"
@@ -85,34 +97,31 @@
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div> -->
-  
-	
-</div>
-<ul class="pagination">
-  <li class="page-item" 
-  :class="currentPage == 1 ? 'disabled' : '' ">
-	<span class="page-link" @click="prev()">Previous</span>
-  </li>
+	</div>
+	<ul class="pagination">
+		<li class="page-item" :class="currentPage == 1 ? 'disabled' : ''">
+			<span class="page-link" @click="prev()">Previous</span>
+		</li>
 
-  <li
-	v-for="page in nPages"
-	:key="page"
-	class="page-item"
-	:class="{active: page == currentPage}"
-  >
-	<span class="page-link" @click="changePage(page)">
-	  {{ page }}
-	</span>
-  </li>
+		<li
+			v-for="page in nPages"
+			:key="page"
+			class="page-item"
+			:class="{active: page == currentPage}"
+		>
+			<span class="page-link" @click="changePage(page)">
+				{{ page }}
+			</span>
+		</li>
 
-  <li class="page-item">
-	<span class="page-link" @click="next()">Next</span>
-  </li>
-</ul>
+		<li class="page-item">
+			<span class="page-link" @click="next()">Next</span>
+		</li>
+	</ul>
 </template>
 
 <style lang="scss" scoped>
-  .page-link:hover{
-    cursor: pointer;
-  }
+	.page-link:hover {
+		cursor: pointer;
+	}
 </style>
