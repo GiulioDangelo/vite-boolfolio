@@ -38,7 +38,7 @@
 
 			// getTypes() {
 			// 	axios.get("http://localhost:8000/api/types").then((response) => {
-			// 		console.log(response.data.data);
+			// 		console.log(response.data);
 			// 	});
 			// },
 
@@ -68,14 +68,14 @@
 
 	<div class="container-fluid d-flex justify-content-center flex-wrap">
 
-		<form>
+		<!-- <form>
 			<label class="mb-2" for="type">Type</label>
 			<select class="form-select w-25" id="type">
-				<option v-for="type in arrTypes">
+				<option v-for="type in arrTypes" :key="type.id">
 					{{ type.name }}
 				</option>
 			</select>
-		</form>
+		</form> -->
 
 
 		<ProjectCard
