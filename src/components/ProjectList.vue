@@ -1,16 +1,19 @@
 <script>
 	import axios from "axios";
 	import ProjectCard from "./ProjectCard.vue";
+	import PostFilter from "./PostFilter.vue";
 
 	export default {
 		components: {
 			ProjectCard,
+			PostFilter,
 		},
 
 		data() {
 			return {
 				arrProj: [],
 				arrTypes: [],
+				typeId : null,
 				currentPage: 1,
 				nPages: 0,
 			};
@@ -36,11 +39,11 @@
 					});
 			},
 
-			// getTypes() {
-			// 	axios.get("http://localhost:8000/api/types").then((response) => {
-			// 		console.log(response.data);
-			// 	});
-			// },
+			getTypes() {
+				axios.get("http://localhost:8000/api/types").then((response) => {
+					this.arrTypes = response.data;
+				});
+			},
 
 			next() {
 				if (this.currentPage < this.nPages) {
@@ -55,10 +58,16 @@
 					this.getProjects();
 				}
 			},
+
+			menageTypeChange(typeId){
+				this.typeId = typeId
+				this.getProjects
+			}
 		},
 
 		created() {
 			this.getProjects();
+			this.getTypes();
 		},
 	};
 </script>
@@ -67,16 +76,10 @@
 	<h2>progetti</h2>
 
 	<div class="container-fluid d-flex justify-content-center flex-wrap">
-
-		<!-- <form>
-			<label class="mb-2" for="type">Type</label>
-			<select class="form-select w-25" id="type">
-				<option v-for="type in arrTypes" :key="type.id">
-					{{ type.name }}
-				</option>
-			</select>
-		</form> -->
-
+		
+		<PostFilter 
+		:arrTypes="arrTypes" 
+		@changeType="menageTypeChange($event)"/>
 
 		<ProjectCard
 			v-for="project in arrProj"
@@ -97,6 +100,7 @@
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div> -->
+
 	</div>
 	<ul class="pagination">
 		<li class="page-item" :class="currentPage == 1 ? 'disabled' : ''">
